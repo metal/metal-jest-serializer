@@ -1,4 +1,4 @@
-# metal-snapshot-serializer
+# metal-jest-serializer
 
 A [Jest](http://facebook.github.io/jest/docs/tutorial-react-native.html#snapshot-test)
 snapshot serializer for use with [Metal.js](http://www.metaljs.com/).
