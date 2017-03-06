@@ -1,4 +1,4 @@
-const {html} = require('js-beautify');
+const html = require('js-beautify').html;
 
 module.exports = {
   print(component) {
