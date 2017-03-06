@@ -1,0 +1,26 @@
+{
+  "name": "metal-jest-serializer",
+  "version": "1.0.0",
+  "description": "A jest snapshot serializer for use with Metal.js",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mthadley/metal-jest-serializer.git"
+  },
+  "keywords": [
+    "metal",
+    "jest",
+    "snapshot"
+  ],
+  "author": "Mike Hadley",
+  "license": "MIT",
+  "dependencies": {
+    "js-beautify": "^1.6.11"
+  },
+  "devDependencies": {
+    "jest": "^19.0.2"
+  }
+}
