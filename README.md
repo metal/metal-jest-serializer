@@ -21,10 +21,10 @@ Now you can start writing snapshot tests!
 
 ```js
 describe('MyComponent', () => {
-  it('should render', () => {
+  test('should render', () => {
     const myComponent = new MyComponent();
 
     expect(myComponent).toMatchSnapshot();
-  })
-})
+  });
+});
 ```
