@@ -16,3 +16,15 @@ Just add the following to your Jest configuration in your `package.json`:
   ]
 }
 ```
+
+Now you can start writing snapshot tests!
+
+```js
+describe('MyComponent', () => {
+  it('should render', () => {
+    const myComponent = new MyComponent();
+
+    expect(myComponent).toMatchSnapshot();
+  })
+})
+```
