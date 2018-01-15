@@ -1,20 +1,12 @@
+const IncrementalDomRenderer = require('metal-incremental-dom').default;
 const html = require('js-beautify').html;
 
 module.exports = {
   print(component) {
-    const portals = [];
-
-    let componentHTML = component.element.outerHTML;
-
-    if (component.components) {
-      for (const childName in component.components) {
-        const child = component.components[childName];
-
-        if (child.portalElement) {
-          componentHTML += child.element.outerHTML;
-        }
-      }
-    }
+    let componentHTML = appendPortalMarkup(
+      component,
+      component.element.outerHTML
+    );
 
     return html(
       componentHTML,
@@ -30,3 +22,23 @@ module.exports = {
     return !!val && !!val.__metal_component__;
   }
 };
+
+function appendPortalMarkup(component, snapshot) {
+  snapshot = snapshot || '';
+
+  const data = IncrementalDomRenderer.getData(component);
+
+  if (data.childComponents && data.childComponents.length) {
+    for (const childName in data.childComponents) {
+      const childComponent = data.childComponents[childName];
+
+      if (childComponent.portalElement) {
+        snapshot += childComponent.element.outerHTML;
+      }
+
+      snapshot = appendPortalMarkup(childComponent, snapshot);
+    }
+  }
+
+  return snapshot;
+}
