@@ -1,6 +1,6 @@
 {
   "name": "metal-jest-serializer",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A jest snapshot serializer for use with Metal.js",
   "main": "src/index.js",
   "engines": {
