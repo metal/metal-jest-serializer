@@ -1,3 +1,6 @@
+const IncrementalDomRenderer = require('metal-incremental-dom').default;
+const Component = require('metal-component').default;
+
 const serializer = require('../index');
 
 describe('snapshot serializer', () => {
@@ -25,5 +28,20 @@ describe('snapshot serializer', () => {
     };
 
     expect(serializer.print(val)).toBe('<div>foo</div>');
+  });
+
+  it('should append child portals to parent value', () => {
+    const comp = new Component();
+    comp.element.innerHTML = 'foo';
+
+    const data = IncrementalDomRenderer.getData(comp);
+
+    const child = new Component();
+    child.element.innerHTML = 'portal';
+    child.portalElement = true;
+
+    data.childComponents = [child];
+
+    expect(serializer.print(comp)).toBe('<div>foo</div>\n<div>portal</div>');
   });
 });
