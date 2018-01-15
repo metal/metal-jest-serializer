@@ -26,4 +26,25 @@ describe('snapshot serializer', () => {
 
     expect(serializer.print(val)).toBe('<div>foo</div>');
   });
+
+  it('should append child portals to parent value', () => {
+    const element = document.createElement('div');
+    element.innerHTML = 'foo';
+
+    const portal = document.createElement('div');
+    portal.innerHTML = 'portal';
+
+    const val = {
+      element,
+      components: {
+        portal: {
+          element: portal,
+          portalElement: true
+        }
+      },
+      __metal_component__: true
+    };
+
+    expect(serializer.print(val)).toBe('<div>foo</div>\n<div>portal</div>');
+  });
 });

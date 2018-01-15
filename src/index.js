@@ -2,8 +2,22 @@ const html = require('js-beautify').html;
 
 module.exports = {
   print(component) {
+    const portals = [];
+
+    let componentHTML = component.element.outerHTML;
+
+    if (component.components) {
+      for (const childName in component.components) {
+        const child = component.components[childName];
+
+        if (child.portalElement) {
+          componentHTML += child.element.outerHTML;
+        }
+      }
+    }
+
     return html(
-      component.element.outerHTML,
+      componentHTML,
       {
         indent_size: 2,
         unformatted: 'none',
