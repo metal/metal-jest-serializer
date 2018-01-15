@@ -3,7 +3,7 @@ const html = require('js-beautify').html;
 
 module.exports = {
   print(component) {
-    let componentHTML = appendPortalMarkup(
+    const componentHTML = appendPortalHTML(
       component,
       component.element.outerHTML
     );
@@ -23,9 +23,7 @@ module.exports = {
   }
 };
 
-function appendPortalMarkup(component, snapshot) {
-  snapshot = snapshot || '';
-
+function appendPortalHTML(component, componentHTML) {
   const data = IncrementalDomRenderer.getData(component);
 
   if (data.childComponents && data.childComponents.length) {
@@ -33,12 +31,12 @@ function appendPortalMarkup(component, snapshot) {
       const childComponent = data.childComponents[childName];
 
       if (childComponent.portalElement) {
-        snapshot += childComponent.element.outerHTML;
+        componentHTML += childComponent.element.outerHTML;
       }
 
-      snapshot = appendPortalMarkup(childComponent, snapshot);
+      componentHTML = appendPortalHTML(childComponent, componentHTML);
     }
   }
 
-  return snapshot;
+  return componentHTML;
 }
